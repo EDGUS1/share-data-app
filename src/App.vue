@@ -1,6 +1,11 @@
 <script setup>
-const title = 'ShareApp'
+import Sidebar from './views/Sidebar.vue'
+import ContentPage from './views/ContentPage.vue'
 </script>
+
 <template>
-  <h1>{{ title }}</h1>
+  <div class="min-h-screen flex mx-auto">
+    <Sidebar :data="$store.state.data" :types="$store.state.types" />
+    <ContentPage />
+  </div>
 </template>
