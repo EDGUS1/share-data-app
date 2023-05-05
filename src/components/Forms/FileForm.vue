@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import store from '../store'
-import downloadFile from '../helpers/downloadFile.js'
+import store from '../../store'
+import downloadFile from '../../helpers/downloadFile.js'
 
 const name = ref('')
 const file_list = reactive([])

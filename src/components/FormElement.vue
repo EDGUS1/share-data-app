@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import NewUrl from './NewUrl.vue'
-import NewCode from './NewCode.vue'
-import NewFile from './NewFile.vue'
-import NewInfo from './NewInfo.vue'
+
+import UrlForm from './Forms/UrlForm.vue'
+import InfoForm from './Forms/InfoForm.vue'
+import CodeForm from './Forms/CodeForm.vue'
+import FileForm from './Forms/FileForm.vue'
 
 const selectOption = ref(0)
 </script>
@@ -14,8 +15,8 @@ const selectOption = ref(0)
     <option value="0" hidden>Seleccione</option>
     <option v-bind:value="e.id" :key="e.id" v-for="e in $store.state.types">{{ e.name }}</option>
   </select>
-  <NewUrl v-if="selectOption == 1" />
-  <NewInfo v-else-if="selectOption == 2" />
-  <NewCode v-else-if="selectOption == 3" />
-  <NewFile v-else-if="selectOption == 4" />
+  <UrlForm v-if="selectOption == 1" />
+  <InfoForm v-else-if="selectOption == 2" />
+  <CodeForm v-else-if="selectOption == 3" />
+  <FileForm v-else-if="selectOption == 4" />
 </template>

@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import store from '../store'
+import store from '../../store'
 
 const name = ref('')
 const element = ref('')
