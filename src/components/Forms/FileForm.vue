@@ -3,8 +3,15 @@ import { reactive, ref } from 'vue'
 import store from '../../store'
 import downloadFile from '../../helpers/downloadFile.js'
 
+const { edit, datafile } = defineProps(['edit', 'datafile'])
+
 const name = ref('')
 const file_list = reactive([])
+
+if (edit) {
+  name.value = datafile.name
+  for (let i = 0; i < datafile.data.length; i++) file_list.push(datafile.data[i])
+}
 
 const addFile = (e) => {
   for (let i = 0; i < e.target.files.length; i++) {
@@ -25,11 +32,20 @@ const addFile = (e) => {
 
 const saveElement = () => {
   if (file_list.length > 0) {
-    store.commit('addElement', {
-      type: 4,
-      name: name.value,
-      data: file_list
-    })
+    if (edit) {
+      store.commit('updateElement', {
+        ...datafile,
+        name: name.value,
+        data: file_list,
+        dateUpdated: Date.now()
+      })
+    } else {
+      store.commit('addElement', {
+        type: 4,
+        name: name.value,
+        data: file_list
+      })
+    }
   }
 }
 </script>
@@ -53,7 +69,7 @@ const saveElement = () => {
       </ul>
     </div>
     <button type="submit" class="bg-green-600 text-white px-2" @click.prevent="saveElement">
-      Guardar
+      {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>
 </template>

@@ -2,17 +2,34 @@
 import { ref } from 'vue'
 import store from '../../store'
 
+const { edit, datacode } = defineProps(['edit', 'datacode'])
+
 const name = ref('')
 const origin = ref('')
 const code = ref('')
 
+if (datacode) {
+  name.value = datacode.name
+  origin.value = datacode.data[0].origin
+  code.value = datacode.data[0].code
+}
+
 const saveElement = () => {
   if (code.value.length > 0) {
-    store.commit('addElement', {
-      type: 3,
-      name: name.value,
-      data: [{ origin: origin.value, code: code.value }]
-    })
+    if (edit) {
+      store.commit('updateElement', {
+        ...datacode,
+        name: name.value,
+        data: [{ origin: origin.value, code: code.value }],
+        dateUpdated: Date.now()
+      })
+    } else {
+      store.commit('addElement', {
+        type: 3,
+        name: name.value,
+        data: [{ origin: origin.value, code: code.value }]
+      })
+    }
   }
 }
 </script>
@@ -33,7 +50,7 @@ const saveElement = () => {
       <textarea name="" id="" cols="30" rows="10" v-model="code"></textarea>
     </div>
     <button type="submit" class="bg-green-600 text-white px-2" @click.prevent="saveElement">
-      Guardar
+      {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>
 </template>
