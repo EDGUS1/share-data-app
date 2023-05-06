@@ -15,8 +15,8 @@ const selectOption = ref(0)
     <option value="0" hidden>Seleccione</option>
     <option v-bind:value="e.id" :key="e.id" v-for="e in $store.state.types">{{ e.name }}</option>
   </select>
-  <UrlForm v-if="selectOption == 1" />
-  <InfoForm v-else-if="selectOption == 2" />
-  <CodeForm v-else-if="selectOption == 3" />
-  <FileForm v-else-if="selectOption == 4" />
+  <UrlForm v-if="selectOption == 1" :edit="false" />
+  <InfoForm v-else-if="selectOption == 2" :edit="false" />
+  <CodeForm v-else-if="selectOption == 3" :edit="false" />
+  <FileForm v-else-if="selectOption == 4" :edit="false" />
 </template>
