@@ -3,17 +3,18 @@ import store from '../store'
 
 defineProps(['dataElements'])
 
-const changeState = (e) => {
-  store.state.selectElement = { id: e.target.id }
+const changeState = (id) => {
+  store.state.selectElement = { id }
   store.state.typeView = 2
 }
 
-const editElement = () => {
-  console.log('Edit')
+const editElement = (id) => {
+  store.state.editElement = { id }
+  store.state.typeView = 3
 }
 
-const deleteElement = () => {
-  console.log('Delete')
+const deleteElement = (id) => {
+  store.commit('deleteElement', id)
 }
 </script>
 
@@ -24,10 +25,10 @@ const deleteElement = () => {
       :key="d.id"
       class="flex justify-between border-2 border-white p-2 px-4 my-2"
     >
-      <span :id="d.id" class="cursor-pointer" @click="changeState">{{ d.name || d.id }}</span>
+      <span class="cursor-pointer" @click="changeState(d.id)">{{ d.name || d.id }}</span>
       <span>
-        <button class="mx-4" @click="editElement">Editar</button>
-        <button @click="deleteElement">Eliminar</button>
+        <button class="mx-4" @click="editElement(d.id)">Editar</button>
+        <button @click="deleteElement(d.id)">Eliminar</button>
       </span>
     </li>
   </ul>
