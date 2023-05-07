@@ -17,35 +17,34 @@ const addFile = (e) => {
   for (let i = 0; i < e.target.files.length; i++) {
     file_list.push(e.target.files[i])
   }
+  // e.target.value = ''
+}
 
-  // const file = e.target.files[0]
-  // const reader = new FileReader()
-  // reader.onload = function () {
-  //   const arrayBuffer = this.result
-  //   const array = new Uint8Array(arrayBuffer)
-  //   const binaryString = String.fromCharCode.apply(null, array)
-
-  //   console.log(binaryString)
-  // }
-  // reader.readAsArrayBuffer(file)
+const deteleFile = (index) => {
+  file_list.splice(index, 1)
 }
 
 const saveElement = () => {
+  const data_files = [...file_list]
   if (file_list.length > 0) {
     if (edit) {
       store.commit('updateElement', {
         ...datafile,
         name: name.value,
-        data: file_list,
+        data: data_files,
         dateUpdated: Date.now()
       })
+      store.state.selectElement = { id: datafile.id }
+      store.state.typeView = 2
     } else {
       store.commit('addElement', {
         type: 4,
         name: name.value,
-        data: file_list
+        data: data_files
       })
     }
+    name.value = ''
+    file_list.splice(0)
   }
 }
 </script>
@@ -62,9 +61,10 @@ const saveElement = () => {
     </div>
     <div>
       <ul>
-        <li v-for="el in file_list">
+        <li v-for="(el, index) in file_list">
           <span>{{ el.name }}</span>
-          <button class="bg-blue-200" @click.prevent="downloadFile(el)">Descargar</button>
+          <button class="bg-blue-500" @click.prevent="downloadFile(el)">Descargar</button>
+          <button class="bg-red-500" @click.prevent="deteleFile(index)">Eliminar</button>
         </li>
       </ul>
     </div>
