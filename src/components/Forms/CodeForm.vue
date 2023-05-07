@@ -23,6 +23,8 @@ const saveElement = () => {
         data: [{ origin: origin.value, code: code.value }],
         dateUpdated: Date.now()
       })
+      store.state.selectElement = { id: datacode.id }
+      store.state.typeView = 2
     } else {
       store.commit('addElement', {
         type: 3,
@@ -30,6 +32,9 @@ const saveElement = () => {
         data: [{ origin: origin.value, code: code.value }]
       })
     }
+    name.value = ''
+    origin.value = ''
+    code.value = ''
   }
 }
 </script>

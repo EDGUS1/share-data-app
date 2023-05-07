@@ -18,6 +18,8 @@ const saveElement = () => {
         name: content.value,
         dateUpdated: Date.now()
       })
+      store.state.selectElement = { id: datainfo.id }
+      store.state.typeView = 2
     } else {
       store.commit('addElement', {
         type: 2,
@@ -25,6 +27,7 @@ const saveElement = () => {
         data: []
       })
     }
+    content.value = ''
   }
 }
 </script>
