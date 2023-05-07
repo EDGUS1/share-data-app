@@ -4,27 +4,10 @@ import { v4 as uuidv4 } from 'uuid'
 const store = createStore({
   state() {
     return {
-      typeView: 1,
+      typeView: 0,
       data: [],
-      types: [
-        {
-          id: 1,
-          name: 'link'
-        },
-        {
-          id: 2,
-          name: 'info'
-        },
-        {
-          id: 3,
-          name: 'code'
-        },
-        {
-          id: 4,
-          name: 'file'
-        }
-      ],
-      selectElement: {}
+      selectElement: {},
+      editElement: {}
     }
   },
   getters: {
@@ -33,6 +16,9 @@ const store = createStore({
     },
     getElementByType: (state) => (id) => {
       return state.data.filter((d) => d.type === id)
+    },
+    getElementToEdit(state) {
+      return state.data.filter((d) => d.id == state.editElement.id)
     }
   },
   mutations: {
@@ -43,6 +29,14 @@ const store = createStore({
         dateCreated: Date.now(),
         dateUpdated: Date.now()
       })
+    },
+    updateElement(state, updateData) {
+      state.data.forEach((e, index) => {
+        if (e.id === updateData.id) state.data.splice(index, 1, updateData)
+      })
+    },
+    deleteElement(state, index) {
+      state.data.splice(index, 1)
     }
   }
 })
