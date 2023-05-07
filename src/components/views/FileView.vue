@@ -10,7 +10,7 @@ const { datafile } = defineProps(['datafile'])
     <div>
       <p>Files</p>
       <ul>
-        <li v-for="i in datainfo.data">{{ i }}</li>
+        <li v-for="i in datafile.data">{{ i.name }}</li>
       </ul>
     </div>
   </div>
