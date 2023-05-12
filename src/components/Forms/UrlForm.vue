@@ -1,8 +1,9 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, toRefs, watch } from 'vue'
 import store from '../../store'
 
-const { edit, dataurl } = defineProps(['edit', 'dataurl'])
+const props = defineProps(['edit', 'dataurl'])
+const { edit, dataurl } = toRefs(props)
 
 const name = ref('')
 const element = ref('')
@@ -10,10 +11,18 @@ const old_element_index = ref(0)
 const urls = reactive([])
 const editUrlField = ref(false)
 
-if (edit) {
-  name.value = dataurl.name
-  for (let i = 0; i < dataurl.data.length; i++) urls.push(dataurl.data[i])
+if (edit.value) {
+  name.value = dataurl.value.name
+  for (let i = 0; i < dataurl.value.data.length; i++) urls.push(dataurl.value.data[i])
 }
+
+watch(dataurl, () => {
+  if (edit.value) {
+    name.value = dataurl.value.name
+    urls.splice(0)
+    for (let i = 0; i < dataurl.value.data.length; i++) urls.push(dataurl.value.data[i])
+  }
+})
 
 const addElement = () => {
   if (editUrlField.value) {
@@ -40,14 +49,14 @@ const editUrl = (el, index) => {
 const saveElement = () => {
   const data_url = [...urls]
   if (urls.length > 0) {
-    if (edit) {
+    if (edit.value) {
       store.commit('updateElement', {
-        ...dataurl,
+        ...dataurl.value,
         name: name.value,
         data: data_url,
         dateUpdated: Date.now()
       })
-      store.state.selectElement = { id: dataurl.id }
+      store.state.selectElement = { id: dataurl.value.id }
       store.state.typeView = 2
     } else {
       store.commit('addElement', {

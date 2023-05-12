@@ -1,24 +1,27 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, toRefs, watch } from 'vue'
 import store from '../../store'
 
-const { edit, datainfo } = defineProps(['edit', 'datainfo'])
+const props = defineProps(['edit', 'datainfo'])
+const { edit, datainfo } = toRefs(props)
 
 const content = ref('')
 
-if (edit) {
-  content.value = datainfo.name
-}
+if (edit.value) content.value = datainfo.value.name
+
+watch(datainfo, () => {
+  if (edit.value) content.value = datainfo.value.name
+})
 
 const saveElement = () => {
   if (content.value.length > 0) {
-    if (edit) {
+    if (edit.value) {
       store.commit('updateElement', {
-        ...datainfo,
+        ...datainfo.value,
         name: content.value,
         dateUpdated: Date.now()
       })
-      store.state.selectElement = { id: datainfo.id }
+      store.state.selectElement = { id: datainfo.value.id }
       store.state.typeView = 2
     } else {
       store.commit('addElement', {

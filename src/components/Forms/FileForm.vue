@@ -1,17 +1,26 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, toRefs, watch } from 'vue'
 import store from '../../store'
 import downloadFile from '../../helpers/downloadFile.js'
 
-const { edit, datafile } = defineProps(['edit', 'datafile'])
+const props = defineProps(['edit', 'datafile'])
+const { edit, datafile } = toRefs(props)
 
 const name = ref('')
 const file_list = reactive([])
 
-if (edit) {
-  name.value = datafile.name
-  for (let i = 0; i < datafile.data.length; i++) file_list.push(datafile.data[i])
+if (edit.value) {
+  name.value = datafile.value.name
+  for (let i = 0; i < datafile.value.data.length; i++) file_list.push(datafile.value.data[i])
 }
+
+watch(datafile, () => {
+  if (edit.value) {
+    name.value = datafile.value.name
+    file_list.splice(0)
+    for (let i = 0; i < datafile.value.data.length; i++) file_list.push(datafile.value.data[i])
+  }
+})
 
 const addFile = (e) => {
   for (let i = 0; i < e.target.files.length; i++) {
@@ -27,14 +36,14 @@ const deteleFile = (index) => {
 const saveElement = () => {
   const data_files = [...file_list]
   if (file_list.length > 0) {
-    if (edit) {
+    if (edit.value) {
       store.commit('updateElement', {
-        ...datafile,
+        ...datafile.value,
         name: name.value,
         data: data_files,
         dateUpdated: Date.now()
       })
-      store.state.selectElement = { id: datafile.id }
+      store.state.selectElement = { id: datafile.value.id }
       store.state.typeView = 2
     } else {
       store.commit('addElement', {
