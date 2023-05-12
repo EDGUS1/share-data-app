@@ -1,5 +1,7 @@
 <script setup>
-const { datacode } = defineProps(['datacode'])
+import copyClipboard from '../../helpers/copyClipboard'
+
+defineProps(['datacode'])
 </script>
 
 <template>
@@ -16,5 +18,6 @@ const { datacode } = defineProps(['datacode'])
       <p>Codigo</p>
       <span>{{ datacode.data[0].code }}</span>
     </div>
+    <button @click="copyClipboard(datacode.data[0].code)">Copiar</button>
   </div>
 </template>

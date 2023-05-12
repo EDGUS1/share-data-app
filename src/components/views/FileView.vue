@@ -1,5 +1,5 @@
 <script setup>
-const { datafile } = defineProps(['datafile'])
+defineProps(['datafile'])
 </script>
 <template>
   <div>
@@ -10,7 +10,7 @@ const { datafile } = defineProps(['datafile'])
     <div>
       <p>Files</p>
       <ul>
-        <li v-for="i in datafile.data">{{ i.name }}</li>
+        <li v-for="(i, index) in datafile.data" :key="index">{{ i.name }}</li>
       </ul>
     </div>
   </div>

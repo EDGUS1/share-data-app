@@ -1,5 +1,7 @@
 <script setup>
-const { dataurl } = defineProps(['dataurl'])
+import copyClipboard from '../../helpers/copyClipboard'
+
+defineProps(['dataurl'])
 </script>
 <template>
   <div>
@@ -10,7 +12,10 @@ const { dataurl } = defineProps(['dataurl'])
     <div>
       <p>Links</p>
       <ul>
-        <li v-for="u in dataurl.data">{{ u }}</li>
+        <li v-for="(u, index) in dataurl.data" :key="index">
+          <span>{{ u }} </span>
+          <button @click="copyClipboard(u)">Copiar</button>
+        </li>
       </ul>
     </div>
   </div>
