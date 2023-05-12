@@ -16,7 +16,10 @@ const changeState = () => {
 
 const filterList = () => {
   filterBtn.value = false
-  data.value = store.getters.getElementByType(selectedType.value)
+}
+
+const inputChange = () => {
+  filterBtn.value = false
 }
 
 const defaultState = () => {
@@ -27,15 +30,20 @@ const defaultState = () => {
 }
 
 const filteredList = computed(() => {
-  if (input && input !== '') {
+  if (input.value && input.value !== '' && selectedType.value != '0') {
+    return data.value.filter(
+      (d) =>
+        d.name.toLowerCase().includes(input.value.toLowerCase()) && d.type == selectedType.value
+    )
+  }
+  if (selectedType.value != '0') {
+    return data.value.filter((d) => d.type == selectedType.value)
+  }
+  if (input.value && input.value !== '') {
     return data.value.filter((d) => d.name.toLowerCase().includes(input.value.toLowerCase()))
   }
   return data.value
 })
-
-const inputChange = () => {
-  filterBtn.value = false
-}
 </script>
 
 <template>
