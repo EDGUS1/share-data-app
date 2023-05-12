@@ -61,7 +61,7 @@ const saveElement = () => {
     </div>
     <div>
       <ul>
-        <li v-for="(el, index) in file_list">
+        <li v-for="(el, index) in file_list" :key="index">
           <span>{{ el.name }}</span>
           <button class="bg-blue-500" @click.prevent="downloadFile(el)">Descargar</button>
           <button class="bg-red-500" @click.prevent="deteleFile(index)">Eliminar</button>
