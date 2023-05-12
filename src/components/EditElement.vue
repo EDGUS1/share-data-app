@@ -4,7 +4,7 @@ import InfoForm from './Forms/InfoForm.vue'
 import CodeForm from './Forms/CodeForm.vue'
 import FileForm from './Forms/FileForm.vue'
 
-const { data } = defineProps(['data'])
+defineProps(['data'])
 </script>
 
 <template>

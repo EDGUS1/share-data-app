@@ -4,7 +4,7 @@ import FileView from './views/FileView.vue'
 import InfoView from './views/InfoView.vue'
 import UrlView from './views/UrlView.vue'
 
-const { data } = defineProps(['data'])
+defineProps(['data'])
 </script>
 
 <template>
