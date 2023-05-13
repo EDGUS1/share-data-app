@@ -13,6 +13,7 @@ defineProps(['datacode'])
     <div>
       <p>Fuente</p>
       <span>{{ datacode.data[0].origin }}</span>
+      <button @click="copyClipboard(datacode.data[0].origin)">Copiar</button>
     </div>
     <div>
       <p>Codigo</p>
