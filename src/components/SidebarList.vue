@@ -16,18 +16,22 @@ const editElement = (id) => {
 const deleteElement = (index) => {
   store.commit('deleteElement', index)
 }
+
+const itemName = (element) => {
+  return (element.name || element.id).slice(0, 15)
+}
 </script>
 
 <template>
   <ul>
     <li
-      v-for="(d, index) in dataElements"
-      :key="d.id"
+      v-for="(element, index) in dataElements"
+      :key="element.id"
       class="flex justify-between border-2 border-white p-2 px-4 my-2"
     >
-      <span class="cursor-pointer" @click="changeState(d.id)">{{ d.name || d.id }}</span>
+      <span class="cursor-pointer" @click="changeState(element.id)">{{ itemName(element) }}</span>
       <span>
-        <button class="mx-4" @click="editElement(d.id)">Editar</button>
+        <button class="mx-4" @click="editElement(element.id)">Editar</button>
         <button @click="deleteElement(index)">Eliminar</button>
       </span>
     </li>
