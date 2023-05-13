@@ -54,7 +54,7 @@ const filteredList = computed(() => {
     <label for="type_id">Tipo de elemento</label>
     <select name="" id="type_id" @change="filterList" v-model="selectedType">
       <option value="0" hidden>Seleccione</option>
-      <option v-bind:value="t.id" :key="t.id" v-for="t in props.types">{{ t.name }}</option>
+      <option v-bind:value="typ.id" :key="typ.id" v-for="typ in props.types">{{ typ.name }}</option>
     </select>
     <button class="bg-sky-700 text-white px-2" @click="defaultState" :disabled="filterBtn">
       Borrar filtros

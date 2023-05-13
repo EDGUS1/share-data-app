@@ -12,9 +12,9 @@ defineProps(['dataurl'])
     <div>
       <p>Links</p>
       <ul>
-        <li v-for="(u, index) in dataurl.data" :key="index">
-          <span>{{ u }} </span>
-          <button @click="copyClipboard(u)">Copiar</button>
+        <li v-for="(url, index) in dataurl.data" :key="index">
+          <span>{{ url }} </span>
+          <button @click="copyClipboard(url)">Copiar</button>
         </li>
       </ul>
     </div>

@@ -87,9 +87,9 @@ const saveElement = () => {
       {{ editUrlField ? 'Actualizar' : 'Agregar' }}
     </button>
     <ul>
-      <li v-for="(el, index) in urls" :key="index">
-        <span>{{ el }}</span>
-        <button class="bg-blue-500" @click.prevent="editUrl(el, index)">Edit</button>
+      <li v-for="(url, index) in urls" :key="index">
+        <span>{{ url }}</span>
+        <button class="bg-blue-500" @click.prevent="editUrl(url, index)">Edit</button>
         <button class="bg-red-500" @click.prevent="deleteUrl(index)">X</button>
       </li>
     </ul>
