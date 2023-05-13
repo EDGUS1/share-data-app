@@ -31,9 +31,9 @@ const addElement = () => {
   } else {
     if (element.value.length > 0) {
       urls.push(element.value)
-      element.value = ''
     }
   }
+  element.value = ''
 }
 
 const deleteUrl = (index) => {
