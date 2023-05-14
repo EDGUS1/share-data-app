@@ -49,7 +49,7 @@ const filteredList = computed(() => {
 
 <template>
   <header class="w-[25%] min-w-[20rem] max-w-xs bg-amber-300 p-3">
-    <input type="text" v-model="input" placeholder="Busqueda" @keypress="inputChange" />
+    <input type="text" v-model="input" placeholder="Busqueda" @input="inputChange" />
     <button class="bg-sky-700 text-white px-2" @click="changeState">+ Nuevo</button>
     <br />
     <label for="type_id">Tipo de elemento</label>
