@@ -2,6 +2,7 @@
 import { reactive, ref, toRefs, watch } from 'vue'
 import store from '../../store'
 import downloadFile from '../../helpers/downloadFile.js'
+import { TYPE_FILE_ID, VIEW_STATE } from '../../constants'
 
 const props = defineProps(['edit', 'datafile'])
 const { edit, datafile } = toRefs(props)
@@ -44,10 +45,10 @@ const saveElement = () => {
         dateUpdated: Date.now()
       })
       store.state.selectElement = { id: datafile.value.id }
-      store.state.typeView = 2
+      store.state.typeView = VIEW_STATE
     } else {
       store.commit('addElement', {
-        type: 4,
+        type: TYPE_FILE_ID,
         name: name.value,
         data: data_files
       })

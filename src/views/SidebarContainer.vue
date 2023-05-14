@@ -2,6 +2,7 @@
 import { ref, reactive, computed } from 'vue'
 import SidebarList from '../components/SidebarList.vue'
 import store from '../store'
+import { CREATE_STATE } from '../constants'
 
 const props = defineProps(['data', 'types'])
 
@@ -11,7 +12,7 @@ const filterBtn = ref(true)
 const data = reactive({ value: props.data })
 
 const changeState = () => {
-  store.state.typeView = 1
+  store.state.typeView = CREATE_STATE
 }
 
 const filterList = () => {

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, toRefs, watch } from 'vue'
 import store from '../../store'
+import { TYPE_INFO_ID, VIEW_STATE } from '../../constants'
 
 const props = defineProps(['edit', 'datainfo'])
 const { edit, datainfo } = toRefs(props)
@@ -22,10 +23,10 @@ const saveElement = () => {
         dateUpdated: Date.now()
       })
       store.state.selectElement = { id: datainfo.value.id }
-      store.state.typeView = 2
+      store.state.typeView = VIEW_STATE
     } else {
       store.commit('addElement', {
-        type: 2,
+        type: TYPE_INFO_ID,
         name: content.value,
         data: []
       })

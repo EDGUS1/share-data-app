@@ -1,18 +1,27 @@
-export const types = [
+export const TYPE_LINK_ID = 1
+export const TYPE_INFO_ID = 2
+export const TYPE_CODE_ID = 3
+export const TYPE_FILE_ID = 4
+
+export const CREATE_STATE = 1
+export const VIEW_STATE = 2
+export const EDIT_STATE = 3
+
+export const TYPES = [
   {
-    id: 1,
+    id: TYPE_LINK_ID,
     name: 'link'
   },
   {
-    id: 2,
+    id: TYPE_INFO_ID,
     name: 'info'
   },
   {
-    id: 3,
+    id: TYPE_CODE_ID,
     name: 'code'
   },
   {
-    id: 4,
+    id: TYPE_FILE_ID,
     name: 'file'
   }
 ]

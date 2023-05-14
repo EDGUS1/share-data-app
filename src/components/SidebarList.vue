@@ -1,16 +1,17 @@
 <script setup>
+import { EDIT_STATE, VIEW_STATE } from '../constants'
 import store from '../store'
 
 defineProps(['dataElements'])
 
 const changeState = (id) => {
   store.state.selectElement = { id }
-  store.state.typeView = 2
+  store.state.typeView = VIEW_STATE
 }
 
 const editElement = (id) => {
   store.state.editElement = { id }
-  store.state.typeView = 3
+  store.state.typeView = EDIT_STATE
 }
 
 const deleteElement = (index) => {

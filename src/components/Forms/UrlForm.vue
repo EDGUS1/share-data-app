@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref, toRefs, watch } from 'vue'
 import store from '../../store'
+import { TYPE_LINK_ID, VIEW_STATE } from '../../constants'
 
 const props = defineProps(['edit', 'dataurl'])
 const { edit, dataurl } = toRefs(props)
@@ -57,10 +58,10 @@ const saveElement = () => {
         dateUpdated: Date.now()
       })
       store.state.selectElement = { id: dataurl.value.id }
-      store.state.typeView = 2
+      store.state.typeView = VIEW_STATE
     } else {
       store.commit('addElement', {
-        type: 1,
+        type: TYPE_LINK_ID,
         name: name.value,
         data: data_url
       })
