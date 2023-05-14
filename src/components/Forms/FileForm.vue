@@ -35,8 +35,9 @@ const deteleFile = (index) => {
 }
 
 const saveElement = () => {
-  const data_files = [...file_list]
   if (file_list.length > 0) {
+    const data_files = [...file_list]
+    name.value = name.value.trim()
     if (edit.value) {
       store.commit('updateElement', {
         ...datafile.value,
@@ -60,7 +61,7 @@ const saveElement = () => {
 </script>
 
 <template>
-  <form action="">
+  <form @submit.prevent="saveElement">
     <div class="m-4">
       <label for="name_id">Nombre</label>
       <input type="text" name="" id="name_id" v-model="name" />
@@ -78,7 +79,7 @@ const saveElement = () => {
         </li>
       </ul>
     </div>
-    <button type="submit" class="bg-green-600 text-white px-2" @click.prevent="saveElement">
+    <button type="submit" class="bg-green-600 text-white px-2">
       {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>

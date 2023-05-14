@@ -15,6 +15,7 @@ watch(datainfo, () => {
 })
 
 const saveElement = () => {
+  content.value = content.value.trim()
   if (content.value.length > 0) {
     if (edit.value) {
       store.commit('updateElement', {
@@ -37,13 +38,19 @@ const saveElement = () => {
 </script>
 
 <template>
-  <form action="">
+  <form @submit.prevent="saveElement">
     <div>
       <label for="content_id">Contenido</label>
       <br />
-      <textarea name="" id="content_id" cols="30" rows="10" v-model="content"></textarea>
+      <textarea
+        id="content_id"
+        cols="30"
+        rows="10"
+        v-model="content"
+        @keydown.enter.exact.prevent="saveElement"
+      ></textarea>
     </div>
-    <button type="submit" class="bg-green-600 text-white px-2" @click.prevent="saveElement">
+    <button type="submit" class="bg-green-600 text-white px-2">
       {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>

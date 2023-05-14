@@ -48,8 +48,10 @@ const editUrl = (el, index) => {
 }
 
 const saveElement = () => {
-  const data_url = [...urls]
   if (urls.length > 0) {
+    const data_url = [...urls]
+    name.value = name.value.trim()
+
     if (edit.value) {
       store.commit('updateElement', {
         ...dataurl.value,
@@ -73,7 +75,7 @@ const saveElement = () => {
 </script>
 
 <template>
-  <form action="">
+  <form @submit.prevent="saveElement">
     <div class="m-4">
       <label for="name_id">nombre</label>
       <input id="name_id" type="text" v-model="name" />
@@ -94,7 +96,7 @@ const saveElement = () => {
         <button class="bg-red-500" @click.prevent="deleteUrl(index)">X</button>
       </li>
     </ul>
-    <button type="submit" class="bg-green-600 text-white px-2" @click.prevent="saveElement">
+    <button type="submit" class="bg-green-600 text-white px-2">
       {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>
