@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import { v4 as uuidv4 } from 'uuid'
 
 const store = createStore({
   state() {
@@ -24,7 +23,7 @@ const store = createStore({
   mutations: {
     addElement(state, newData) {
       state.data.push({
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         ...newData,
         dateCreated: Date.now(),
         dateUpdated: Date.now()
