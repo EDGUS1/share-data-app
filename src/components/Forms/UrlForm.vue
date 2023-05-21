@@ -39,6 +39,8 @@ const addElement = () => {
 
 const deleteUrl = (index) => {
   urls.splice(index, 1)
+  editUrlField.value = false
+  element.value = ''
 }
 
 const editUrl = (el, index) => {
