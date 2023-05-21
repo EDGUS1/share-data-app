@@ -13,6 +13,9 @@ const store = createStore({
     getElement(state) {
       return state.data.filter((d) => d.id == state.selectElement.id)
     },
+    getElementByIndex: (state) => (index) => {
+      return state.data[index]
+    },
     getElementByType: (state) => (id) => {
       return state.data.filter((d) => d.type === id)
     },

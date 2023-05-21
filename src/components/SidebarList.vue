@@ -1,5 +1,5 @@
 <script setup>
-import { EDIT_STATE, VIEW_STATE } from '../constants'
+import { DEFAULT_STATE, EDIT_STATE, VIEW_STATE } from '../constants'
 import store from '../store'
 
 defineProps(['dataElements'])
@@ -15,6 +15,9 @@ const editElement = (id) => {
 }
 
 const deleteElement = (index) => {
+  const { id } = store.getters.getElementByIndex(index)
+  if (store.state.editElement.id == id || store.state.selectElement.id == id)
+    store.state.typeView = DEFAULT_STATE
   store.commit('deleteElement', index)
 }
 
