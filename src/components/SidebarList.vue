@@ -31,12 +31,12 @@ const itemName = (element) => {
     <li
       v-for="(element, index) in dataElements"
       :key="element.id"
-      class="flex justify-between border-2 border-white p-2 px-4 my-2"
+      class="flex justify-between border border-white rounded shadow p-2 px-4 my-3 hover:scale-[1.05]"
     >
       <span class="cursor-pointer" @click="changeState(element.id)">{{ itemName(element) }}</span>
       <span>
-        <button class="mx-4" @click="editElement(element.id)">Editar</button>
-        <button @click="deleteElement(index)">Eliminar</button>
+        <button class="mx-4" @click="editElement(element.id)">✏</button>
+        <button @click="deleteElement(index)">❌</button>
       </span>
     </li>
   </ul>
