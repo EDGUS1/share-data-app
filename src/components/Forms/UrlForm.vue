@@ -77,28 +77,56 @@ const saveElement = () => {
 </script>
 
 <template>
-  <form @submit.prevent="saveElement">
-    <div class="m-4">
-      <label for="name_id">nombre</label>
-      <input id="name_id" type="text" v-model="name" />
+  <form class="h-fit bg-[#2a2f3b] p-3 rounded" @submit.prevent="saveElement">
+    <div class="flex justify-between my-4 flex-col">
+      <label for="name_id">Nombre</label>
+      <input
+        id="name_id"
+        type="text"
+        v-model="name"
+        class="w-full bg-gray-600 p-2 rounded outline-0 mt-1"
+      />
     </div>
 
-    <div class="m-4">
-      <label for="element_id">elemento</label>
-      <input id="element_id" type="text" v-model="element" />
+    <div class="flex justify-between my-4 flex-col">
+      <label for="element_id">Url</label>
+      <input
+        id="element_id"
+        type="text"
+        v-model="element"
+        class="w-full bg-gray-600 p-2 rounded outline-0 mt-1"
+      />
     </div>
 
-    <button class="bg-sky-700 text-white px-2" @click.prevent="addElement">
-      {{ editUrlField ? 'Actualizar' : 'Agregar' }}
-    </button>
-    <ul>
-      <li v-for="(url, index) in urls" :key="index">
+    <div class="flex justify-end">
+      <button
+        class="bg-sky-700 text-white px-3 py-1 hover:opacity-75 rounded"
+        @click.prevent="addElement"
+      >
+        {{ editUrlField ? 'Actualizar' : 'Agregar' }}
+      </button>
+    </div>
+    <ul class="my-5" v-if="urls.length > 0">
+      <li class="flex justify-between my-2" v-for="(url, index) in urls" :key="index">
         <span>{{ url }}</span>
-        <button class="bg-blue-500" @click.prevent="editUrl(url, index)">Edit</button>
-        <button class="bg-red-500" @click.prevent="deleteUrl(index)">X</button>
+        <div>
+          <button
+            class="bg-blue-500 mx-3 px-3 py-1 hover:opacity-75 rounded"
+            @click.prevent="editUrl(url, index)"
+          >
+            Edit
+          </button>
+          <button
+            class="bg-red-500 px-3 py-1 hover:opacity-75 rounded"
+            @click.prevent="deleteUrl(index)"
+          >
+            X
+          </button>
+        </div>
       </li>
     </ul>
-    <button type="submit" class="bg-green-600 text-white px-2">
+    <div class="my-5" v-else>No hay url agregadas</div>
+    <button type="submit" class="w-full bg-green-600 text-white p-1 hover:opacity-75 rounded">
       {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>

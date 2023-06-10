@@ -38,19 +38,19 @@ const saveElement = () => {
 </script>
 
 <template>
-  <form @submit.prevent="saveElement">
-    <div>
-      <label for="content_id">Contenido</label>
-      <br />
+  <form class="h-fit bg-[#2a2f3b] p-3 rounded" @submit.prevent="saveElement">
+    <div class="my-3">
+      <label for="content_id" class="block my-2">Contenido</label>
+
       <textarea
         id="content_id"
-        cols="30"
         rows="10"
         v-model="content"
+        class="w-full bg-gray-600 outline-0 rounded p-1"
         @keydown.enter.exact.prevent="saveElement"
       ></textarea>
     </div>
-    <button type="submit" class="bg-green-600 text-white px-2">
+    <button type="submit" class="w-full bg-green-600 text-white p-1 hover:opacity-75 rounded">
       {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>

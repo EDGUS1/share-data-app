@@ -61,25 +61,45 @@ const saveElement = () => {
 </script>
 
 <template>
-  <form @submit.prevent="saveElement">
-    <div class="m-4">
+  <form class="h-fit bg-[#2a2f3b] p-3 rounded" @submit.prevent="saveElement">
+    <div class="flex justify-between my-4 flex-col">
       <label for="name_id">Nombre</label>
-      <input type="text" name="" id="name_id" v-model="name" />
+      <input
+        type="text"
+        id="name_id"
+        v-model="name"
+        class="w-full bg-gray-600 p-2 rounded outline-0 mt-1"
+      />
     </div>
-    <div class="m-4">
-      <label for="file_id">Archivo</label>
-      <input type="file" name="" id="file_id" multiple @change="addFile" />
+    <div class="flex my-4">
+      <label
+        for="file_id"
+        class="w-full text-center rounded p-2 bg-blue-600 hover:opacity-75 cursor-pointer"
+        >Agregar nuevo archivo</label
+      >
+      <input type="file" id="file_id" class="hidden" multiple @change="addFile" />
     </div>
-    <div>
-      <ul>
-        <li v-for="(file, index) in file_list" :key="index">
-          <span>{{ file.name }}</span>
-          <button class="bg-blue-500" @click.prevent="downloadFile(file)">Descargar</button>
-          <button class="bg-red-500" @click.prevent="deteleFile(index)">Eliminar</button>
-        </li>
-      </ul>
-    </div>
-    <button type="submit" class="bg-green-600 text-white px-2">
+    <ul class="my-5" v-if="file_list.length > 0">
+      <li class="flex justify-between my-2" v-for="(file, index) in file_list" :key="index">
+        <span>{{ file.name }}</span>
+        <div>
+          <button
+            class="bg-blue-500 mx-3 px-3 py-1 hover:opacity-75 rounded"
+            @click.prevent="downloadFile(file)"
+          >
+            Descargar
+          </button>
+          <button
+            class="bg-red-500 px-3 py-1 hover:opacity-75 rounded"
+            @click.prevent="deteleFile(index)"
+          >
+            Eliminar
+          </button>
+        </div>
+      </li>
+    </ul>
+    <div class="my-5" v-else>No hay archivos agregados</div>
+    <button type="submit" class="w-full bg-green-600 text-white p-1 hover:opacity-75 rounded">
       {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>

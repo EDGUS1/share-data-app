@@ -54,27 +54,36 @@ const saveElement = () => {
 </script>
 
 <template>
-  <form @submit.prevent="saveElement">
-    <div class="m-4">
+  <form class="h-fit bg-[#2a2f3b] p-3 rounded" @submit.prevent="saveElement">
+    <div class="flex justify-between my-4 flex-col">
       <label for="name_id">Nombre</label>
-      <input type="text" name="" id="name_id" v-model="name" />
+      <input
+        type="text"
+        id="name_id"
+        v-model="name"
+        class="w-full bg-gray-600 p-2 rounded outline-0 mt-1"
+      />
     </div>
-    <div class="m-4">
+    <div class="flex justify-between my-4 flex-col">
       <label for="origin_id">Fuente</label>
-      <input type="text" name="" id="origin_id" v-model="origin" />
+      <input
+        type="text"
+        id="origin_id"
+        v-model="origin"
+        class="w-full bg-gray-600 p-2 rounded outline-0 mt-1"
+      />
     </div>
-    <div class="m-4">
-      <label for="code_id">Codigo</label>
-      <br />
+    <div class="my-4">
+      <label for="code_id" class="block my-2">Codigo</label>
       <textarea
         id="code_id"
-        cols="30"
-        rows="10"
+        rows="7"
         v-model="code"
+        class="w-full bg-gray-600 rounded p-1 outline-0"
         @keydown.enter.exact.prevent="saveElement"
       ></textarea>
     </div>
-    <button type="submit" class="bg-green-600 text-white px-2">
+    <button type="submit" class="w-full bg-green-600 text-white p-1 hover:opacity-75 rounded">
       {{ edit ? 'Actualizar' : 'Guardar' }}
     </button>
   </form>
